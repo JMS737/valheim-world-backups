@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# Exit if any command fails
+set -e
+
+WORLD_DIR=/home/ubuntu/valheim-server/data/config/worlds_local/RovheimmWorld
+REPOS_DIR=/home/ubuntu/source/repos/valheim-world-backups
+
+echo "Backing up valheim-server to github"
+echo "  WORLD: $WORLD_DIR"
+echo "  REPOS: $REPOS_DIR"
+
+# Delete all previous files
+rm -r $REPOS_DIR/*
+
+# Copy world files to repos
+sudo cp -r $WORLD_DIR $REPOS_DIR
+
+echo "Copied files in $WORLD_DIR to $REPOS_DIR"
+
+sudo chown -R ubuntu:ubuntu $REPOS_DIR
+
+echo "Updated ownership"
+
+# Commit changes to repos
+git -C $REPOS_DIR add .
+git -C $REPOS_DIR commit -m "World Save"
+
+echo "Created commit"
+
+# Push changes
+git -C $REPOS_DIR push
+
+echo "Pushed changes"
