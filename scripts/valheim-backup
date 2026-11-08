@@ -4,7 +4,7 @@
 set -e
 
 WORLD_DIR=/home/ubuntu/valheim-server/data/config/worlds_local/RovheimmWorld
-REPOS_DIR=/home/ubuntu/source/repos/valheim-world-backups
+REPOS_DIR=/home/ubuntu/source/repos/valheim-world-backups/worlds
 
 echo "Backing up valheim-server to github"
 echo "  WORLD: $WORLD_DIR"
